@@ -24,7 +24,6 @@ type CreateTodoDto {
 
 type Query {
   auth: User!
-  helloTodos: String!
   getAllTodos: [CreateTodoDto!]!
   getByUser(userId: String!): [CreateTodoDto!]!
 }

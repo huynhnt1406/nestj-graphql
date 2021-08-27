@@ -20,4 +20,3 @@ import { UserService } from './user.service';
 })
 export class UserModule {}
 
-//@UseGuards(GqlAuthGuard)

@@ -14,13 +14,8 @@ export class TodoResolver {
     constructor(
         private todoService: TodoService
     ) { }
-    @Query(() => String)
-    async helloTodos() {
-        return 'this is todo api'
-    }
     @Query(() => [CreateTodoDto])
     async getAllTodos(@CurrentUser() user:any){
-        console.log(user)
         try {
             if(user.isAdmin === true){
                 return this.todoService.getAllTodos()
@@ -38,11 +33,11 @@ export class TodoResolver {
         return this.todoService.create(user.id,input)
     }
     @Mutation(() => CreateTodoDto, { nullable: true })
-    async delete(@Args('id') id: string) {
-        return this.todoService.delete(id)
+    async delete(@CurrentUser() user:any,@Args('id') id: string) {
+        return this.todoService.delete(user.id,id)
     }
     @Mutation(() => CreateTodoDto)
-    async update(@Args('id') id: string, @Args('input') input: UpdateTodo) {
-        return this.todoService.update(id, input)
+    async update(@CurrentUser() user:any,@Args('id') id: string, @Args('input') input: UpdateTodo) {
+        return this.todoService.update(user.id,id, input)
     }
 }
