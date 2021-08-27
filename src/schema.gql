@@ -1,0 +1,61 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: String
+  username: String
+  name: String
+  password: String
+  isAdmin: String
+}
+
+type UserToken {
+  token: String!
+  user: User!
+}
+
+type CreateTodoDto {
+  id: String
+  userId: String
+  name: String
+  isCompleted: Boolean
+}
+
+type Query {
+  auth: User!
+  helloTodos: String!
+  getAllTodos: [CreateTodoDto!]!
+  getByUser(userId: String!): [CreateTodoDto!]!
+}
+
+type Mutation {
+  register(input: RegisterUser!): User!
+  login(input: loginUser!): UserToken!
+  create(input: TodoInput!): CreateTodoDto!
+  delete(id: String!): CreateTodoDto
+  update(input: UpdateTodo!, id: String!): CreateTodoDto!
+}
+
+input RegisterUser {
+  name: String
+  username: String
+  password: String
+  isAdmin: Boolean
+}
+
+input loginUser {
+  username: String
+  password: String
+  isAdmin: Boolean
+}
+
+input TodoInput {
+  name: String!
+  isCompleted: Boolean = false
+}
+
+input UpdateTodo {
+  name: String
+  isCompleted: Boolean = false
+}
